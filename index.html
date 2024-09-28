@@ -3,17 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilo.css">
     <title>Jogo da Memória</title>
 </head>
 <body>
-    <header>Jogo da Memória</header>
+    <header>
+        <h1>Jogo da Memória</h1>
+    </header>
     <main>
+        <div id="tempo">
+            <span id="cronometro">0:00</span>
+        </div>
         <div id="container">
-            
+            <div id="abacaxi" class="fruta" onclick="girarCarta()">
+                <div id="verso">
+                    <img src="img/cardback.png" alt="verso da carta">
+                </div>
+                <div id="frente">
+                    <img src="img/abacaxi.png" alt="frente da carta">
+                </div>
+            </div>
+            <div class="fruta" onclick="girarCarta()"></div>
+            <div class="fruta" onclick="girarCarta()"></div>
+            <div class="fruta" onclick="girarCarta()"></div>
+            <div class="fruta" onclick="girarCarta()"></div>
+            <div class="fruta" onclick="girarCarta()"></div>
+            <div class="fruta" onclick="girarCarta()"></div>
+            <div class="fruta" onclick="girarCarta()"></div>
+            <div class="fruta" onclick="girarCarta()"></div>
+            <div class="fruta" onclick="girarCarta()"></div>
+            <div class="fruta" onclick="girarCarta()"></div>
+            <div class="fruta" onclick="girarCarta()"></div>
+            <div class="fruta" onclick="girarCarta()"></div>
+            <div class="fruta" onclick="girarCarta()"></div>
+            <div class="fruta" onclick="girarCarta()"></div>
+            <div class="fruta" onclick="girarCarta()"></div>
+        </div>
+        <div id="botaoreiniciar">
+            <button id="restart">Reiniciar</button>
         </div>
     </main>
     <footer>
-
+        <p>Jogo criado por Marcos Willian</p>
     </footer>
+
+    <script src="script/app.js"></script>
 </body>
 </html>
