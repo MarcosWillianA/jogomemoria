@@ -62,8 +62,16 @@ h1 {
     position: absolute;
     width: 100%;
     height: 100%;
+    background-size: contain;
     backface-visibility: hidden;
     transform: rotateY(180deg);
+}
+
+.frenteCarta {
+    border: 1px solid yellow;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
 }
 
 #botaoreiniciar {

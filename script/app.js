@@ -2,7 +2,7 @@ const cronometro = document.getElementById('cronometro');
 const cartas = ['abacaxi', 'banana', 'limao', 'maca', 'mamao', 'melancia', 'pera', 'uva'];
 const container = document.getElementById('container');
 const frutas = document.querySelectorAll('.fruta'); 
-const frente = frutas.lastChild.src; 
+const frente = document.querySelectorAll('.frentecarta'); 
 
 console.log(frente);
 
@@ -34,14 +34,9 @@ function gerarParesAleatorios(array) {
 const cartasParesAleatorios = gerarParesAleatorios(cartas);
 console.log(cartasParesAleatorios);
 
-function inserirImagens (cartas) {
-    for (i = 0; i < cartas.length; i++) {
-        
-    }
-}
-
-inserirImagens (cartasParesAleatorios);
-
+frente.forEach((img, indice) => {
+    img.setAttribute('src', `img/${cartasParesAleatorios[indice]}.png`);
+})
 
 
 
