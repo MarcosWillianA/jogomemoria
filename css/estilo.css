@@ -51,14 +51,14 @@ h1 {
     transform: rotateY(180deg);
 }
 
-#verso {
+.verso {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
 }
 
-#frente {
+.frente {
     position: absolute;
     width: 100%;
     height: 100%;
