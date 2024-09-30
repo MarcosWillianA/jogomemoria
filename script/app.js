@@ -3,13 +3,12 @@ const cartas = ['abacaxi', 'banana', 'limao', 'maca', 'mamao', 'melancia', 'pera
 const container = document.getElementById('container');
 const frutas = document.querySelectorAll('.fruta'); 
 const frente = document.querySelectorAll('.frentecarta'); 
-
-console.log(frente);
+const botaoReset = document.querySelector('#restart');
 
 let timerInterval;
 let seconds = 0;
 
-function embaralhar(array) { // Algorítmo Fisher-Yates Shuffle
+function embaralhar(array) { // Algorítmo Fisher-Yates Shuffle - 
     for (let indice = array.length; indice; indice--) {
         const indiceAleatorio = Math.floor(Math.random() * indice);
         const elemento = array[indice - 1];
@@ -31,15 +30,15 @@ function gerarParesAleatorios(array) {
     return embaralhar(duplicados);
 }
 
+// Pares gerados aleatoriamente
 const cartasParesAleatorios = gerarParesAleatorios(cartas);
-console.log(cartasParesAleatorios);
+console.log(cartasParesAleatorios);  
+
+// Distribuir os pares de acordo com cada img
 
 frente.forEach((img, indice) => {
     img.setAttribute('src', `img/${cartasParesAleatorios[indice]}.png`);
-})
-
-
-
+}) 
 
 // CLIQUE E GIRAR DE CARTA
 
@@ -59,6 +58,22 @@ frutas.forEach(fruta => {
     });
 });
 
+botaoReset.addEventListener('click', function reiniciar() {
+    
+    clearInterval(timerInterval); // para o cronômetro
+    timerInterval = null; // redefine o intervalo para null
+    seconds = 0; // zera os segundos
+    cronometro.textContent = '00:00'; // reseta a exibição do cronômetro
 
+    // Remove a classe 'girar' de todos os cards
+    frutas.forEach(fruta => {
+        fruta.classList.remove('girar');
+    });
+    
+})
+
+// Pra amanhã: Criar uma função que verifica as duas primeiras imagens clicadas:
+// Se forem iguais, elas ficarão permanentemente viradas: 
+// Senão, elas vão reverter e voltar a ficar escondidas de novo. 
 
 
