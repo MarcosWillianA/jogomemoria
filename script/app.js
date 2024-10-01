@@ -5,8 +5,13 @@ const frutas = document.querySelectorAll('.fruta');
 const frente = document.querySelectorAll('.frentecarta'); 
 const botaoReset = document.querySelector('#restart');
 
+let cliques = 0; 
 let timerInterval;
 let seconds = 0;
+let cartaVirada;
+let imagemVirada;
+let foiEscolhida;
+let cartasEscolhidas = [];
 
 function embaralhar(array) { // Algorítmo Fisher-Yates Shuffle - 
     for (let indice = array.length; indice; indice--) {
@@ -43,10 +48,40 @@ frente.forEach((img, indice) => {
 // CLIQUE E GIRAR DE CARTA
 
 frutas.forEach(fruta => {    
-    fruta.addEventListener('click', () => {        
+    fruta.addEventListener('click', () => {     
+        //Contador de cliques: 
+        cliques++;
+        console.log(cliques);
         // Adiciona a classe 'girar' apenas ao elemento clicado
         fruta.classList.add('girar');
+        fruta.classList.add('foiescolhida');
 
+        //Verificação das cartas
+        if (cliques === 2) {
+            frutas.forEach(clique => clique.style.pointerEvents = 'none');
+            cliques = 0;
+            
+            cartaVirada = document.getElementsByClassName('girar');
+            cartasEscolhidas = Array.from(cartaVirada);
+            foiEscolhida = document.getElementsByClassName('foiescolhida');
+            imagemVirada = document.querySelectorAll('.girar .frente .frentecarta');
+
+            if (imagemVirada[0].getAttribute('src') !== imagemVirada[1].getAttribute('src')) {
+                console.log('As cartas são diferentes, vire de volta!');
+                setTimeout(() => {
+                    cartasEscolhidas.forEach(carta => carta.classList.remove('girar'));
+                    frutas.forEach(clique => clique.style.pointerEvents = 'auto');  
+                }, 1500);
+                
+
+            } else {
+                console.log('As cartas são iguals, faça com que fiquem viradas pelo resto do jogo');
+                frutas.forEach(clique => clique.style.pointerEvents = 'auto');
+            }
+            console.log(cliques);
+        }
+
+        // Iniciar o cronômetro
         if (!timerInterval) {
             timerInterval = setInterval(() => {
                 seconds++;

@@ -51,6 +51,10 @@ h1 {
     transform: rotateY(180deg);
 }
 
+.checado {
+    transform: rotateY(180deg); /* Colocar pra rodar em 360deg caso ele gire de volta pra posição do verso */
+}
+
 .verso {
     position: absolute;
     width: 100%;
