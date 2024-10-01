@@ -18,6 +18,7 @@ header, main, footer {
 
 h1 {
     font-size: 24px;
+    text-align: center;
 }
 
 /* campo de jogo */ 
@@ -26,6 +27,11 @@ h1 {
     border: 1px solid violet;
     padding: 10px;
     text-align: center;
+}
+
+#tempo h2 {
+    display: none;
+    text-shadow: 2px 2px 2px blue;
 }
 
 #container {
@@ -51,7 +57,7 @@ h1 {
     transform: rotateY(180deg);
 }
 
-.checado {
+.corretas {
     transform: rotateY(180deg); /* Colocar pra rodar em 360deg caso ele gire de volta pra posição do verso */
 }
 
@@ -87,6 +93,12 @@ h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-transform: uppercase;
     width: 180px;
+}
+
+#restart:active {
+    border: 1px solid green;
+    background-color: lime;
+    color: darkgreen;
 }
 
 footer p {
