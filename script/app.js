@@ -60,50 +60,8 @@ frutas.forEach(fruta => {
             return;
         } else {
             cliques++;
-        }               
-         
-        console.log(cliques); //Contador de cliques:
-        fruta.classList.add('girar'); // Adiciona a classe 'girar' apenas ao elemento clicado
-
-        cartaVirada = document.getElementsByClassName('girar');
-        cartasEscolhidas = Array.from(cartaVirada);
-        imagemVirada = document.querySelectorAll('.girar .frente .frentecarta');
-        
-        //Verificação das cartas
-        if (cliques === 2) {
-            console.log(imagemVirada[1].getAttribute('src'));
-
-            frutas.forEach(clique => clique.style.pointerEvents = 'none');
-            botaoReset.style.pointerEvents = 'none';
-            cliques = 0;
-
-            if (imagemVirada[0].getAttribute('src') === imagemVirada[1].getAttribute('src')) {
-                console.log('As cartas são iguais, faça com que fiquem viradas pelo resto do jogo');
-                cartasEscolhidas.forEach(carta => carta.classList.add('corretas'));
-                paresFeitos++;
-                frutas.forEach(clique => clique.style.pointerEvents = 'auto');
-                botaoReset.style.pointerEvents = 'auto';
-    
-            } else {
-                console.log('As cartas são diferentes, vire de volta!');
-                setTimeout(() => {
-                    cartasEscolhidas.forEach(carta => carta.classList.remove('girar'));
-                    frutas.forEach(clique => clique.style.pointerEvents = 'auto');  
-                    botaoReset.style.pointerEvents = 'auto';
-                }, 1500);
-            }
-            console.log(cliques); // Apagar quando estiver concluído. 
-            imagemVirada = [];
-            console.log(imagemVirada);
-
-            console.log(`Pares feitos: ${paresFeitos}`);
-            if (paresFeitos === 8) {
-                vitoria.style.display = 'block';
-                cronometro.style.color = 'red';
-                clearInterval(timerInterval);
-            }
         }
-
+        
         // Iniciar o cronômetro
         if (!timerInterval) {
             timerInterval = setInterval(() => {
