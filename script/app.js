@@ -61,7 +61,48 @@ frutas.forEach(fruta => {
         } else {
             cliques++;
         }
-        
+        console.log(cliques);
+        fruta.classList.add('girar');
+        cartaVirada = document.getElementsByClassName('girar'); 
+        cartasSelecionadas = Array.from(cartaVirada);      
+        console.log(cartaVirada);
+
+        const srcImagem = fruta.querySelector('.frente .frentecarta').getAttribute('src');
+        cartasEscolhidas.push(srcImagem);
+
+        if (cliques === 2) {
+            frutas.forEach(clique => clique.style.pointerEvents = 'none');
+            botaoReset.style.pointerEvents = 'none';
+            cliques = 0;
+
+            if (cartasEscolhidas[0] === cartasEscolhidas[1]) {
+                console.log('As cartas são iguais, faça com que fiquem viradas pelo resto do jogo');
+                cartasSelecionadas.forEach(carta => carta.classList.add('corretas'));
+                paresFeitos++;
+                frutas.forEach(clique => clique.style.pointerEvents = 'auto');
+                botaoReset.style.pointerEvents = 'auto';
+            }
+            else {
+                console.log('As cartas são diferentes, vire de volta!');
+                setTimeout(() => {
+                    cartasSelecionadas.forEach(carta => carta.classList.remove('girar'));
+                    frutas.forEach(clique => clique.style.pointerEvents = 'auto');
+                    //botaoReset.style.pointerEvents = 'auto';
+                }, 1500)
+                
+            }
+            cartasEscolhidas = [];
+        } 
+    
+        console.log(`Pares feitos: ${paresFeitos}`); 
+        console.log(cartasEscolhidas);
+        if (paresFeitos === 8) {
+            vitoria.style.display = 'block';
+            cronometro.style.color = 'red';
+            clearInterval(timerInterval);
+        }
+
+
         // Iniciar o cronômetro
         if (!timerInterval) {
             timerInterval = setInterval(() => {
