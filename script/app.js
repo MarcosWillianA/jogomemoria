@@ -11,12 +11,15 @@ let paresFeitos = 0;
 let timerInterval;
 let seconds = 0;
 let cartaVirada;
-let imagemVirada;
+let imagemVirada = [];
 let foiEscolhida;
 let cartasEscolhidas = [];
 let cartasCorretas = [];
+let primeiraCarta = null;
+let segundaCarta = null;
 
-// Gerar as cartas aleatoriamente -----------------------------------------------------------------------------
+
+// Gerar as cartas aleatoriamente (FUNCIONANDO) -----------------------------------------------------------------------------
 
 function embaralhar(array) { // Algorítmo Fisher-Yates Shuffle - 
     for (let indice = array.length; indice; indice--) {
@@ -52,50 +55,47 @@ frente.forEach((img, indice) => {
 
 // CLIQUE E GIRAR DE CARTA --------------------------------------------------------------------------------------
 frutas.forEach(fruta => {    
-    fruta.addEventListener('click', () => {     
-
-        // If/Else pra que apenas cliques em cards não virados contem. 
-        
-        if (fruta.classList.contains('girar') || fruta.classList.contains('foiescolhida') || fruta.classList.contains('corretas')) {
+    fruta.addEventListener('click', () => { // If/Else pra que apenas cliques em cards não virados contem.
+        if (fruta.classList.contains('girar') || fruta.classList.contains('corretas')) {
             return;
         } else {
             cliques++;
-        }        
-        //Contador de cliques: 
-        
-        console.log(cliques);
-        // Adiciona a classe 'girar' apenas ao elemento clicado
-        fruta.classList.add('girar');
-        fruta.classList.add('foiescolhida');
+        }               
+         
+        console.log(cliques); //Contador de cliques:
+        fruta.classList.add('girar'); // Adiciona a classe 'girar' apenas ao elemento clicado
 
+        cartaVirada = document.getElementsByClassName('girar');
+        cartasEscolhidas = Array.from(cartaVirada);
+        imagemVirada = document.querySelectorAll('.girar .frente .frentecarta');
+        
         //Verificação das cartas
         if (cliques === 2) {
+            console.log(imagemVirada[1].getAttribute('src'));
+
             frutas.forEach(clique => clique.style.pointerEvents = 'none');
             botaoReset.style.pointerEvents = 'none';
             cliques = 0;
-            
-            cartaVirada = document.getElementsByClassName('girar');
-            cartasEscolhidas = Array.from(cartaVirada);
-            foiEscolhida = document.getElementsByClassName('foiescolhida');
-            imagemVirada = document.querySelectorAll('.girar .frente .frentecarta');
 
-            if (imagemVirada[0].getAttribute('src') !== imagemVirada[1].getAttribute('src')) {
-                console.log('As cartas são diferentes, vire de volta!');
-                setTimeout(() => {
-                    cartasEscolhidas.forEach(carta => carta.classList.remove('girar'));
-                    cartasEscolhidas.forEach(carta => carta.classList.remove('foiescolhida'));
-                    frutas.forEach(clique => clique.style.pointerEvents = 'auto');  
-                    botaoReset.style.pointerEvents = 'auto';
-                }, 1500);
-
-            } else {
+            if (imagemVirada[0].getAttribute('src') === imagemVirada[1].getAttribute('src')) {
                 console.log('As cartas são iguais, faça com que fiquem viradas pelo resto do jogo');
                 cartasEscolhidas.forEach(carta => carta.classList.add('corretas'));
                 paresFeitos++;
                 frutas.forEach(clique => clique.style.pointerEvents = 'auto');
                 botaoReset.style.pointerEvents = 'auto';
+    
+            } else {
+                console.log('As cartas são diferentes, vire de volta!');
+                setTimeout(() => {
+                    cartasEscolhidas.forEach(carta => carta.classList.remove('girar'));
+                    frutas.forEach(clique => clique.style.pointerEvents = 'auto');  
+                    botaoReset.style.pointerEvents = 'auto';
+                }, 1500);
             }
-            console.log(cliques);
+            console.log(cliques); // Apagar quando estiver concluído. 
+            imagemVirada = [];
+            console.log(imagemVirada);
+
             console.log(`Pares feitos: ${paresFeitos}`);
             if (paresFeitos === 8) {
                 vitoria.style.display = 'block';
@@ -122,10 +122,11 @@ botaoReset.addEventListener('click', function reiniciar() {
     timerInterval = null; // redefine o intervalo para null
     seconds = 0; // zera os segundos
     cronometro.textContent = '00:00'; // reseta a exibição do cronômetro
+    vitoria.style.display = 'none'; // Remove a exibição do texto "Vitória"
     // Remove a classe 'girar' de todos os cards
     frutas.forEach(fruta => {
         fruta.classList.remove('girar');
-        fruta.classList.remove('foiescolhida');
+        //fruta.classList.remove('foiescolhida');
         fruta.classList.remove('corretas');
     });
 

@@ -1,0 +1,18 @@
+//Checar as imagens 
+            if (imagemVirada[0].getAttribute('src') !== imagemVirada[1].getAttribute('src')) {
+                console.log('As cartas são diferentes, vire de volta!');
+                setTimeout(() => {
+                    cartasEscolhidas.forEach(carta => carta.classList.remove('girar'));
+                    frutas.forEach(clique => clique.style.pointerEvents = 'auto');  
+                    botaoReset.style.pointerEvents = 'auto';
+                }, 1500);
+
+            } else {
+                console.log('As cartas são iguais, faça com que fiquem viradas pelo resto do jogo');
+                setTimeout(() => {
+                    cartasEscolhidas.forEach(carta => carta.classList.add('corretas'));
+                }, 1500);
+                paresFeitos++;
+                frutas.forEach(clique => clique.style.pointerEvents = 'auto');
+                botaoReset.style.pointerEvents = 'auto';
+            }

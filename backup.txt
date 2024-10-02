@@ -1,0 +1,65 @@
+Função antiga: 
+
+
+// CLIQUE E GIRAR DE CARTA --------------------------------------------------------------------------------------
+frutas.forEach(fruta => {    
+    fruta.addEventListener('click', () => {     
+        // If/Else pra que apenas cliques em cards não virados contem.
+        if (fruta.classList.contains('girar') || fruta.classList.contains('foiescolhida') || fruta.classList.contains('corretas')) {
+            return;
+        } else {
+            cliques++;
+        }        
+        //Contador de cliques: 
+        console.log(cliques);
+        // Adiciona a classe 'girar' apenas ao elemento clicado
+        fruta.classList.add('girar');
+        fruta.classList.add('foiescolhida');
+
+        //Verificação das cartas
+        if (cliques === 2) {
+            frutas.forEach(clique => clique.style.pointerEvents = 'none');
+            botaoReset.style.pointerEvents = 'none';
+            cliques = 0;
+            
+            cartaVirada = document.getElementsByClassName('girar');
+            cartasEscolhidas = Array.from(cartaVirada);
+            //foiEscolhida = document.getElementsByClassName('foiescolhida');
+            imagemVirada = document.querySelectorAll('.girar .frente .frentecarta');
+
+            if (imagemVirada[0].getAttribute('src') !== imagemVirada[1].getAttribute('src')) {
+                console.log('As cartas são diferentes, vire de volta!');
+                setTimeout(() => {
+                    cartasEscolhidas.forEach(carta => carta.classList.remove('girar'));
+                    cartasEscolhidas.forEach(carta => carta.classList.remove('foiescolhida'));
+                    frutas.forEach(clique => clique.style.pointerEvents = 'auto');  
+                    botaoReset.style.pointerEvents = 'auto';
+                }, 1500);
+
+            } else {
+                console.log('As cartas são iguais, faça com que fiquem viradas pelo resto do jogo');
+                cartasEscolhidas.forEach(carta => carta.classList.add('corretas'));
+                paresFeitos++;
+                frutas.forEach(clique => clique.style.pointerEvents = 'auto');
+                botaoReset.style.pointerEvents = 'auto';
+            }
+            console.log(cliques);
+            console.log(`Pares feitos: ${paresFeitos}`);
+            if (paresFeitos === 8) {
+                vitoria.style.display = 'block';
+                cronometro.style.color = 'red';
+                clearInterval(timerInterval);
+            }
+        }
+
+        // Iniciar o cronômetro
+        if (!timerInterval) {
+            timerInterval = setInterval(() => {
+                seconds++;
+                const minutes = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                cronometro.textContent = `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            }, 1000);
+        }
+    });
+});

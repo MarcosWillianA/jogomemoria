@@ -1,0 +1,38 @@
+Nessa aqui o if começa com as duas sendo iguais. (No original, começa comparando as duas diferentes)
+
+//Verificação das cartas
+        if (cliques === 2) {
+            frutas.forEach(clique => clique.style.pointerEvents = 'none');
+            botaoReset.style.pointerEvents = 'none';
+            cliques = 0;
+            
+            cartaVirada = document.getElementsByClassName('girar');
+            cartasEscolhidas = Array.from(cartaVirada);
+            imagemVirada = document.querySelectorAll('.girar .frente .frentecarta');
+
+            
+            if (imagemVirada[0].getAttribute('src') === imagemVirada[1].getAttribute('src')) {
+                console.log('As cartas são iguais, faça com que fiquem viradas pelo resto do jogo');
+                cartasEscolhidas.forEach(carta => carta.classList.add('corretas'));
+                paresFeitos++;
+                frutas.forEach(clique => clique.style.pointerEvents = 'auto');
+                botaoReset.style.pointerEvents = 'auto';
+
+            } else {
+                console.log('As cartas são diferentes, vire de volta!');
+                setTimeout(() => {
+                    cartasEscolhidas.forEach(carta => carta.classList.remove('girar'));
+                    frutas.forEach(clique => clique.style.pointerEvents = 'auto');  
+                    botaoReset.style.pointerEvents = 'auto';
+                }, 1500);
+            }
+
+            //console.log(cliques); // Apagar quando estiver concluído. 
+
+            console.log(`Pares feitos: ${paresFeitos}`);
+            if (paresFeitos === 8) {
+                vitoria.style.display = 'block';
+                cronometro.style.color = 'red';
+                clearInterval(timerInterval);
+            }
+        }
