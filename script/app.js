@@ -87,6 +87,7 @@ frutas.forEach(fruta => {
                 setTimeout(() => {
                     cartasSelecionadas.forEach(carta => carta.classList.remove('girar'));
                     frutas.forEach(clique => clique.style.pointerEvents = 'auto');
+                    botaoReset.style.pointerEvents = 'auto';
                     //botaoReset.style.pointerEvents = 'auto';
                 }, 1500)
                 
@@ -141,8 +142,6 @@ botaoReset.addEventListener('click', function reiniciar() {
     
 })
 
-// Pra amanhã: Criar uma função que verifica as duas primeiras imagens clicadas:
-// Se forem iguais, elas ficarão permanentemente viradas: 
-// Senão, elas vão reverter e voltar a ficar escondidas de novo. 
+ 
 
 
